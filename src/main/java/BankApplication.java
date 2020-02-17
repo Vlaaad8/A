@@ -152,10 +152,6 @@ public class BankApplication
     {
         Banking banking = (Banking) context.getBean("banking");
 
-
-        Storage<Client> storage = (Storage<Client>) context.getBean("storage");
-        banking.setStorage(storage);
-
         Client client_1 = (Client) context.getBean("client1");
 
         Client client_2 = (Client) context.getBean("client2");
