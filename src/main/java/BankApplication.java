@@ -9,11 +9,12 @@ import com.luxoft.bankapp.service.feed.BankFeedService;
 import com.luxoft.bankapp.service.feed.BankFeedServiceImpl;
 import com.luxoft.bankapp.service.storage.ClientStorage;
 import com.luxoft.bankapp.service.storage.Storage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.StringReader;
 
 public class BankApplication
 {
@@ -22,16 +23,19 @@ public class BankApplication
 
     public static void main(String[] args)
     {
-        Storage<Client> storage = new ClientStorage();
-        Banking banking = initialize(storage);
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("application-context.xml");
 
-//        workWithExistingClients(banking);
+        Storage<Client> storage = (Storage<Client>) context.getBean("storage");
+        Banking banking = initialize(context);
+
+        workWithExistingClients(banking);
 //
 //        bankingServiceDemo(banking);
 //
 //        bankReportsDemo(storage);
 
-        bankFeedDemo(banking);
+//        bankFeedDemo(banking);
     }
 
     private static void bankFeedDemo(Banking banking)
@@ -147,9 +151,11 @@ public class BankApplication
     /*
      * Method that creates a few clients and initializes them with sample values
      */
-    public static Banking initialize(Storage<Client> storage)
+    public static Banking initialize(ApplicationContext context)
     {
-        Banking banking = new BankingImpl();
+        Banking banking = (Banking) context.getBean("banking");
+
+        Storage<Client> storage = (Storage<Client>) context.getBean("storage");
         banking.setStorage(storage);
 
         Client client_1 = new Client(CLIENT_NAMES[0], Gender.MALE);
