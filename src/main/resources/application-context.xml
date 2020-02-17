@@ -6,7 +6,20 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="banking" class="com.luxoft.bankapp.service.BankingImpl" />
+    <bean id="storage" class="com.luxoft.bankapp.service.storage.ClientStorage"
+          scope="singleton" />
 
-    <bean id="storage" class="com.luxoft.bankapp.service.storage.ClientStorage" />
+    <bean id="banking" class="com.luxoft.bankapp.service.BankingImpl"
+          scope="singleton" autowire="byType" />
+
+    <bean id="bankReport" class="com.luxoft.bankapp.service.BankReportServiceImpl">
+        <property name="storage" ref="storage" />
+    </bean>
+
+    <bean id="feedService" class="com.luxoft.bankapp.service.feed.BankFeedServiceImpl"
+          scope="prototype">
+
+        <constructor-arg name="banking" ref="banking" />
+    </bean>
+
 </beans>
