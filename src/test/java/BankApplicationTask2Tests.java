@@ -136,5 +136,38 @@ public class BankApplicationTask2Tests
         assertEquals(1500, account.getOverdraft());
     }
 
+    @Test
+    public void getNumberOfBankClients()
+    {
+        assertEquals(2, bankReport.getNumberOfBankClients());
+
+        BankApplication.workWithExistingClients(banking);
+        BankApplication.bankingServiceDemo(banking);
+
+        assertEquals(3, bankReport.getNumberOfBankClients());
+    }
+
+    @Test
+    public void getAccountsNumber()
+    {
+        assertEquals(3, bankReport.getAccountsNumber());
+
+        BankApplication.workWithExistingClients(banking);
+        BankApplication.bankingServiceDemo(banking);
+
+        assertEquals(5, bankReport.getAccountsNumber());
+    }
+
+    @Test
+    public void getBankCreditSum()
+    {
+        assertEquals(0, bankReport.getBankCreditSum());
+
+        BankApplication.workWithExistingClients(banking);
+        BankApplication.bankingServiceDemo(banking);
+
+        assertEquals(-500, bankReport.getBankCreditSum());
+
+    }
 
 }

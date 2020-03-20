@@ -37,7 +37,7 @@ public class BankApplication
 
         bankingServiceDemo(banking);
 
-//        bankReportsDemo(storage);
+        bankReportsDemo(context);
 
 //        bankFeedDemo(banking);
     }
