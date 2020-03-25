@@ -58,6 +58,7 @@ public class BankApplicationTask3Tests
 
         // TODO you can replace code above with this when will have the method
 //        BankApplication.initialize(applicationContext);
+        BankApplication.bankFeedDemo(applicationContext);
     }
 
     @Test
@@ -86,6 +87,65 @@ public class BankApplicationTask3Tests
     {
         assertNotNull(bankFeedService, "bankFeedService bean should be configured");
         assertTrue((bankFeedService instanceof BankFeedServiceImpl), "bankFeedService should be instantiated with BankFeedServiceImpl class");
+    }
+
+    @Test
+    public void initializationClient1()
+    {
+        Client client = banking.getClient(CLIENT_NAMES[0]);
+        assertNotNull(client, "banking should have client with name: " + CLIENT_NAMES[0]);
+
+        assertEquals(2, client.getAccounts().size());
+    }
+
+    @Test
+    public void client1SavingAccount()
+    {
+        Client client = banking.getClient(CLIENT_NAMES[0]);
+
+        Account account = client.getAccount(AccountType.SAVING);
+
+        assertNotNull(account,
+                client.getName() + "should have " + AccountType.SAVING + " account");
+
+        assertEquals(1000, account.getBalance());
+    }
+
+    @Test
+    public void client1CheckingAccount()
+    {
+        Client client = banking.getClient(CLIENT_NAMES[0]);
+
+        CheckingAccount account = (CheckingAccount) client.getAccount(AccountType.CHECKING);
+
+        assertNotNull(account,
+                client.getName() + "should have " + AccountType.CHECKING + " account");
+
+        assertEquals(0, account.getBalance());
+        assertEquals(1000, account.getOverdraft());
+    }
+
+    @Test
+    public void initializationClient2()
+    {
+        Client client = banking.getClient(CLIENT_NAMES[1]);
+        assertNotNull(client, "banking should have client with name: " + CLIENT_NAMES[1]);
+
+        assertEquals(1, client.getAccounts().size());
+    }
+
+    @Test
+    public void client2CheckingAccount()
+    {
+        Client client = banking.getClient(CLIENT_NAMES[1]);
+
+        CheckingAccount account = (CheckingAccount) client.getAccount(AccountType.CHECKING);
+
+        assertNotNull(account,
+                client.getName() + "should have " + AccountType.CHECKING + " account");
+
+        assertEquals(0, account.getBalance());
+        assertEquals(1500, account.getOverdraft());
     }
 
 
