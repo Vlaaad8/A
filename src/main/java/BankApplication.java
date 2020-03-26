@@ -10,7 +10,6 @@ import com.luxoft.bankapp.service.Banking;
 import com.luxoft.bankapp.service.BankingImpl;
 import com.luxoft.bankapp.model.Client.Gender;
 import com.luxoft.bankapp.service.feed.BankFeedService;
-import com.luxoft.bankapp.service.feed.BankFeedServiceImpl;
 import com.luxoft.bankapp.service.storage.ClientStorage;
 import com.luxoft.bankapp.service.storage.Storage;
 import org.springframework.context.ApplicationContext;
@@ -33,11 +32,11 @@ public class BankApplication
 
         Banking banking = initialize(context);
 
-//        workWithExistingClients(banking);
+        workWithExistingClients(banking);
 
-//        bankingServiceDemo(banking);
+        bankingServiceDemo(banking);
 
-//        bankReportsDemo(context);
+        bankReportsDemo(context);
 
         bankFeedDemo(context);
     }

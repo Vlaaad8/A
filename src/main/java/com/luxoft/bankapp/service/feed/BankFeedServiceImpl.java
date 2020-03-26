@@ -1,5 +1,7 @@
 package com.luxoft.bankapp.service.feed;
 
+
+import com.luxoft.bankapp.service.feed.BankFeedServiceImpl;
 import com.luxoft.bankapp.exceptions.ClientNotFoundException;
 import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.AccountType;
@@ -165,5 +167,10 @@ public class BankFeedServiceImpl implements BankFeedService
     public void setBanking(Banking banking)
     {
         this.banking = banking;
+    }
+
+    public Banking getBanking()
+    {
+        return banking;
     }
 }
